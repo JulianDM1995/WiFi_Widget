@@ -1,2 +1,2 @@
 # WiFi_Widget
-WiFi Widget for a frontend interface. Intended to use for ESP32, ESP8266, or any wifi microcontroller. Takes as parameter an array with all availables networks names, its power in dB and if is secured by password. Also implements function for connect to network and refresh networks.
+WiFi Widget for a frontend interface. Intended to use for ESP32, ESP8266, or any wifi microcontroller. Takes as parameter an array with all availables networks names, its power in dB and if is secured by password. Also implements function for connect to a network and refresh networks. You can personalize parameters like color and marigin in the css file, and labels and icons color in "wifiwidget" json object
