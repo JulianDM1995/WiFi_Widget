@@ -1,0 +1,135 @@
+/* WiFi_Widget was created by Julián Medina 09/02/21 */
+:root {
+  --maincolor: #0D6EFD;
+  --hovercolor: #0B5ED7;
+  --textcolor: white;
+}
+
+.dropbtn {
+  background-color: var(--maincolor);
+  color:  var(--textcolor);
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  height: 30px;
+  justify-content: center;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: var(--hovercolor);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    max-height: 300px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+.dropdown a:hover {background-color: #ddd;}
+
+.labelSSID {
+  font-family: Arial, Helvetica, sans-serif;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-top: 0em;
+    margin-bottom: 0em;
+    width: 180px;
+    overflow: hidden;
+  }
+
+.dropbtn>div{
+    display: inline;
+    vertical-align: middle;
+    justify-content: center;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.show {display: block;}
+
+.divSSID{
+  display: flex;
+  width: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.buttonSSID {
+  width: 100%;
+  overflow: hidden;
+}
+
+.dropdownSSID {
+  cursor: pointer;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wifigrid{
+    
+    display: grid;
+    min-width: 250px;
+    max-width: 400px;
+    grid-template-columns: 30% 70%;
+    margin: 10px 0px 10px 0px;
+    align-items: center;
+    
+}
+.wifibutton{
+    display: grid;
+    margin-top: 20px;
+    grid-template-columns: 2fr 2fr;
+    min-width: 250px;
+    max-width: 400px;
+}
+.doubleButtonSSID{
+    display: grid;
+    grid-template-columns: auto 35px;
+}
+.wifiinput{
+    border: none;
+    border-bottom: 2px solid #aaa;
+}
+.wifiinput:focus {
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #555;
+}
+.buttonShowPass{
+    background-color: white;
+    border-bottom: 2px solid #555;
+    border: none;
+    cursor: pointer;
+    height: 30px;
+    justify-content: center;
+}
+.wifilabel{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@media only screen and (max-width: 400px) {
+  .wifigrid{
+    grid-template-columns: 1fr;
+  }
+  .wifilabel{
+    margin-bottom: 5px;
+  }
+  
+}

@@ -1,0 +1,44 @@
+<!-- WiFi_Widget was created by Julián Medina 09/02/21 -->
+<!-- Minified using JS and CSS Minifier by Andrew Chilton -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="WiFi_Widget.min.css">
+
+</head>
+
+<body>
+  <h1>WiFi_Widget example minified!</h1>
+  <h4>(The same but lighter)</h4>
+  <br>
+  <div id="wifi_div" style="width: 80%;">
+  </div>
+
+  <h3>By Julián Medina</h3>
+
+  <script src="WiFi_Widget.min.js"></script>
+
+  <script>
+
+    let SSIDsx = ["test_net0", "net32", "net_haha", "not_a_net", "just_kidding", "isanet32", "joemama", "my_name_is_jeff", "is420time", "yeah_net", "fuc_covid", "imissher182", "noidont", "again_lol"];
+    let RSSIsx = [-79, -84, -64, -34, -31, -64, -50, -34, -68, -34, -55, -44, -44, -32];
+    let SECUsx = [false, true, true, true, false, false, false, true, false, true, false, true, false, false];
+
+    renderWiFiWidget('wifi_div', 'Medina', 'asd', true, SSIDsx, RSSIsx, SECUsx);
+
+    onWiFiConnect = (ssid, pass) => {
+      console.log("SSID:", ssid, "PASS", pass)
+    }
+
+    refreshWiFi = () => {
+      console.log("Refresh")
+    }
+
+  </script>
+
+</body>
+
+</html>
