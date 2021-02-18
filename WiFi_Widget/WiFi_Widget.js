@@ -38,11 +38,11 @@ function renderWiFiWidget(ID, currentSSID, currentPASS, isSecured, SSIDs, RSSIs,
     x += '<div class="wifilabel">' + wifiwidget.labels.ConnectTo + '</div>';
     x += '<div class="dropdown" id="ssid_list">';
     x += '<div class="doubleButtonSSID">'
-    x += '<button id="buttonSSID" onclick="showDropdown()" class="dropbtn buttonSSID">'
+    x += '<button id="buttonSSID" onclick="showDropdown()" class="dropbtn">'
     x += innerButton(currentSSID);
     x += '</button>';
-    x += '<button onclick="refreshWiFi()" class="dropbtn buttonSSID">'
-    x += '<svg style="pointer-events: none; float: right; margin-right: -1px; margin-left: 1px; margin-top: 1px" height="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path class="downarrow" d="M 16 4 C 10.886719 4 6.617188 7.160156 4.875 11.625 L 6.71875 12.375 C 8.175781 8.640625 11.710938 6 16 6 C 19.242188 6 22.132813 7.589844 23.9375 10 L 20 10 L 20 12 L 27 12 L 27 5 L 25 5 L 25 8.09375 C 22.808594 5.582031 19.570313 4 16 4 Z M 25.28125 19.625 C 23.824219 23.359375 20.289063 26 16 26 C 12.722656 26 9.84375 24.386719 8.03125 22 L 12 22 L 12 20 L 5 20 L 5 27 L 7 27 L 7 23.90625 C 9.1875 26.386719 12.394531 28 16 28 C 21.113281 28 25.382813 24.839844 27.125 20.375 Z"></path></svg>';
+    x += '<button onclick="setLoadingIcon();refreshWiFi()" class="dropbtn buttonSSID">'
+    x += '<svg id="iconReloadSSID", style="pointer-events: none; float: right; margin-right: 5px; margin-left: 1px; margin-top: 1px" height="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path class="downarrow" d="M 16 4 C 10.886719 4 6.617188 7.160156 4.875 11.625 L 6.71875 12.375 C 8.175781 8.640625 11.710938 6 16 6 C 19.242188 6 22.132813 7.589844 23.9375 10 L 20 10 L 20 12 L 27 12 L 27 5 L 25 5 L 25 8.09375 C 22.808594 5.582031 19.570313 4 16 4 Z M 25.28125 19.625 C 23.824219 23.359375 20.289063 26 16 26 C 12.722656 26 9.84375 24.386719 8.03125 22 L 12 22 L 12 20 L 5 20 L 5 27 L 7 27 L 7 23.90625 C 9.1875 26.386719 12.394531 28 16 28 C 21.113281 28 25.382813 24.839844 27.125 20.375 Z"></path></svg>';
     x += '</button>';
     x += '</div>'
     x += '\t<div id="myDropdown" class="dropdown-content">';
@@ -91,12 +91,18 @@ function renderWiFiWidget(ID, currentSSID, currentPASS, isSecured, SSIDs, RSSIs,
     x += '</div>';
 
     document.getElementById(ID).innerHTML = x;
+    document.getElementById(ID).classList.add("div_wifi");
     getEyeIcon();
     document.getElementById("manual_ssid").style.display = "none";
     document.getElementById("inputWiFiPassword").value = currentPASS;
     document.getElementById("password_div").style.display = isSecured ? "grid" : "none";
+    document.getElementById("iconReloadSSID").classList.remove("buttonSSID_loading")
     // document.getElementById("show_password_div").style.display = isSecured ? "grid" : "none";
 
+}
+
+function setLoadingIcon(){
+    document.getElementById("iconReloadSSID").classList.add("buttonSSID_loading")
 }
 
 function innerButton(currentSSID) {
@@ -118,13 +124,14 @@ function getSignalBars(RSSI_magnitude) {
         bars = 1;
     }
     var size = 20; //Size of the icon
-    var bar1 = bars < 1 ? "st0" : "st1";
-    var bar2 = bars < 2 ? "st0" : "st1";
-    var bar3 = bars < 3 ? "st0" : "st1";
-    var bar4 = bars < 4 ? "st0" : "st1";
-    var SignalIcon = '<svg style = "margin-top: auto; margin-bottom: auto", width="' + size + 'px" height="' + size + 'px" x="0px" y="0px" viewBox="0 0 19.5 20" style="enable-background:new 0 0 19.5 20;" xml:space="preserve"> <style type="text/css">.st0 {fill: '
+    var bar1 = bars < 1 ? "st0_bars" : "st1_bars";
+    var bar2 = bars < 2 ? "st0_bars" : "st1_bars";
+    var bar3 = bars < 3 ? "st0_bars" : "st1_bars";
+    var bar4 = bars < 4 ? "st0_bars" : "st1_bars";
+    var SignalIcon = '<svg style = "margin-top: auto; margin-bottom: auto", width="' + size + 'px" height="' + size + 'px" x="0px" y="0px" viewBox="0 0 19.5 20" style="enable-background:new 0 0 19.5 20;" xml:space="preserve"> <style type="text/css">.'
+    SignalIcon += 'st0_bars {fill: '
     SignalIcon += wifiwidget.colors.noSignal;
-    SignalIcon += ';}.st1 {fill: '
+    SignalIcon += ';}.st1_bars {fill: '
     SignalIcon += wifiwidget.colors.signal;
     SignalIcon += ';} </style> <title>' + RSSI_magnitude + 'db</title> <rect x="0.1" y="15" class="'
     SignalIcon += bar1
@@ -185,7 +192,7 @@ function preselectSSID(isSecured, ssid_name) {
 }
 
 // Close the dropdown if the user clicks outside of it
-window.onclick = function (event) {
+window.addEventListener("click", function (event) {
     if (!event.target.matches('.dropbtn')) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
         var i;
@@ -196,7 +203,7 @@ window.onclick = function (event) {
             }
         }
     }
-}
+});
 
 
 let onWiFiConnect = (ssid, pass) => { }
